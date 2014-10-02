@@ -43,7 +43,7 @@ The following sample structure illustrates this relationship;
 		- Property (RichText)
 
 ## Customising a Component
-
+ 
 ### By Example
 
 Markup source and Properties of a Component can be accessed through the **Code** tab when editing a component.
