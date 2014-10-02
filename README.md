@@ -1,9 +1,9 @@
-Whispir - Template Design Studio
+Whispir - Rich Message Studio
 ==============
 
-The Template Design Studio is an intuitive interface which used to create templates. The content of these rich templates can be built using a library of template components, previewed as they would appear on a mobile device, saved and versioned, and finally sent. 
+The Rich Message Studio is an intuitive interface which used to create templates. The content of these rich templates can be built using a library of template components, previewed as they would appear on a mobile device, saved and versioned, and finally sent. 
 
-This repository contains a library of customised components developed by the Whispir Team that can easily be imported into the Template Design Studio within the Whispir Platform.
+This repository contains a library of customised components developed by the Whispir Team that can easily be imported into the Rich Message Studio within the Whispir Platform.
 
 # Components
 
