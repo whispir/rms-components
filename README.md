@@ -1,7 +1,7 @@
 Whispir - Rich Message Studio
 ==============
 
-The Rich Message Studio is an intuitive interface which used to create templates. The content of these rich templates can be built using a library of template components, previewed as they would appear on a mobile device, saved and versioned, and finally sent. 
+The Rich Message Studio is an intuitive interface which used to create rich messages. The content of these rich messages can be built using a library of template components, previewed as they would appear on a mobile device, saved, versioned, and finally sent. 
 
 This repository contains a library of customised components developed by the Whispir Team that can easily be imported into the Rich Message Studio within the Whispir Platform.
 
@@ -43,6 +43,8 @@ The following sample structure illustrates this relationship;
 		- Property (RichText)
 
 ## Customising a Component
+
+Components provide devolopers a **build once, re-use many** approach to building templates and HTML5 apps.
  
 ### By Example
 
@@ -53,9 +55,9 @@ Components *may* be built with only Markup. Entering this HTML code in the **Mar
 	<h1>Hello World</h1>
 	<p>It's a wonderful day</p>
 
-However, editing Markup directly makes it difficult for anyone other than a developer to modify this component. 
+However, editing **Markup** directly makes it difficult for anyone other than a developer to modify this component. 
 
-This is where Elements come in. We can define an Element  of "RichText" type in the component, which will then display a text editor in the left sidebar allowing anyone to edit the text. 
+This is where **Elements** come in. We can define an Element  of "RichText" type in the component, which will then display a text editor in the left sidebar allowing anyone to edit the text. 
 
 Enter the following JSON code in the **Properties** tab;
 
@@ -85,7 +87,7 @@ The **Markup** is now updated to reference the Element;
 
 Now, when editing this component a text editor will appear, and allow anyone to easily update the paragraph of text.
 
-### Overview of Code tabs
+## Editing Component code
 
 ##### Markup 
 
@@ -159,45 +161,141 @@ JSON array of Javascript resource URLs.
 
 * These are external javascript resources which are loaded in the <head> of a Rich Message. 
 
-### Defining Properties
+## Defining Properties
 
-#### How properties work
-*Properties provide an easy way for developers to expose the features of a Component.*
+### How properties work
 
-Properties provide developers with the ability to expose features of their components within the sidebar. 
+Properties provide an easy way for developers to expose features of their components within the sidebar. 
 
-These features might be;
+These features might include;
 
-* Text that can be edited and formatted in an editor.
-* An image to be displayed, including it's height and width.  
-* A link to a video.
-* A location to be displayed on a map.
+* A body of **text** which can be edited and formatted in an editor.
+* An **image** to be displayed, including it's height and width.  
+* A **link** to a video.
+* A **location** to be displayed on a map.
+
+For example, you may have just developed a component that displays an image with a caption. Instead of replacing the image manually in the HTML or editing the text inline, you can expose these as **Image** and **Text** property types in your Markup.
+
+Now, when someone uses your component, they can browse in an image, or edit the text caption without editing the HTML directly.
 
 ### Property types
 
-*(define the types)*
+Proterties are defined using four primary types;
 
-#### Text
-* Renders a standard text input field. 
-* Accepts 
 
-#### RichText
-* Renders a a text editor within the sidebar.
-* Accepts limited HTML and formatted rich text.
+| Type        | Displays in the sidebar                                        | Accepts                      |
+|-------------|----------------------------------------------------------------|------------------------------|
+| *Text*      | Small plain text input field                                   | Any text string              |
+| *PlainText* | Large Plain text editor                                        | Body of plain text           |
+| *RichText*  | Rich HTML text editor                                          | Rich text, basic HTML markup |
+| *Image*     | Widget to upload an image, or select from the resource library | Any image resource           |
+| *Resource*  | Widget to upload a file, such as a CSS or PDF file             | Any text / binary file       |
+| *DropList*  | An dropdown list which provides one or more options to select  | Array of Strings             |
 
-#### Image
-* Image resource.
+### Property Samples
 
-#### Resource
-* File resource.
+The following is an sample of all Properties used within a "Customer Profile" Element;
+
+	[
+	    {
+	        "element": {
+	            "name": "Customer Profile",
+	            "reference": "customerprofile",
+	            "properties": [
+	                {
+	                    "property": {
+	                        "name": "Customer Name",
+	                        "value": "Jack Citizen",
+	                        "type": "Text",
+	                        "reference": "name"
+	                    }
+	                },
+	                {
+	                    "property": {
+	                        "name": "Customer Photo",
+	                        "value": "",
+	                        "type": "Image",
+	                        "reference": "photo"
+	                    }
+	                },	                
+	                {
+	                    "property": {
+	                        "name": "Customer Type",
+	                        "value": "VIP",
+	                        "type": "Droplist",
+	                        "options": ["VIP","Regular"],
+	                        "reference": "type"
+	                    }
+	                },
+	                {
+	                    "property": {
+	                        "name": "Customer Description",
+	                        "value": "A VIP Customer who is always welcoming",
+	                        "type": "PlainText",
+	                        "reference": "description"
+	                    }
+	                },
+	                {
+	                    "property": {
+	                        "name": "Customer Invoice",
+	                        "value": "",
+	                        "type": "Resource",
+	                        "reference": "invoice"
+	                    }
+	                },
+	                {
+	                    "property": {
+	                        "name": "Message to Customer",
+	                        "value": "<p><b>Details</b></p><p>Invoice details</p>",
+	                        "type": "RichText",
+	                        "reference": "msg"
+	                    }
+	                }
+	            ]
+	        }
+	    }
+	]
 
 #### Referencing properties
 
-*(how to reference properties)*
+Properties can be referenced within any content placed in the **Markup** tab, as follows;
 
-#### Setting default values
+		[[element_name.property_reference]]
 
-*(how to set default values for props?)*
+Using the previous "Customer Profile" example above;
+	
+	<div class="customerinvoice">
+		<h1>Your Invoice</h1>
+		<p>
+			<img src="[[customerprofile.photo]]">
+		</p>
+		<p>
+			Hi <strong>[[customerprofile.name]]</strong>
+		</p>
+		<p>
+			[[customerprofile.msg]]
+		</p>
+		<p>
+			{{#if-cond '[[customerprofile.type]]' '==' 'VIP'}}
+			Thanks for your continued loyalty!
+			{{/if-cond}}
+		</p>
+		<p>
+			<a href="[[customerprofile.invoice]]">Access Your Invoice</a>
+		</p>
+	</div>
+		
+	<style>
+		.customerinvoice {
+			color: #888;
+			margin: 20px;
+			font-family: sans-serif;
+			}
+		img {
+			width: 100%;			}
+	</style>
+
+
 
 ### Using Component IDs to provide uniqueness
 
@@ -350,27 +448,36 @@ Iterator used to traverse through an object or array. Returns access to child at
 	 "mobile": "0410509001", 
 	 "num_days": "4", 
 	 "workcentre_name": "Hawthorn", 
-	 "charges_to_pay": "true", 
+	 "new_customer": "true", 
 	 "addressee_only": "false", 
 	 "manifest": 
 	  [{
-	   "name": "Delivery Manifest",
-	   "value": [{"timestamp":"20-10-2014 10:24","note":"Delivered"},
-	             {"timestamp":"20-10-2014 9:11","note":"Signed"}] 
+	   "name": "Job Manifest",
+	   "value": [{"timestamp":"20-10-2014 10:15","note":"Req. Start Time"},
+	             {"timestamp":"21-10-2014 16:00","note":"End Time"}] 
 	  }]
 	}]
 
 #### Sample conditional logic in template (plain email shown here)
 
-	Hi @@fullname@@, You have an item to collect within @@num_days@@ 
+	Hi @@fullname@@, 
+	
+	You have an job to process within @@num_days@@ 
 	days at @@workcentre_name@@. 
 
-	{{#if-cond @@charges_to_pay@@ '==' true}} Charges to pay. {{/if-cond}}
+	{{#if-cond @@new_customer@@ '==' true}} 
+	See the check-in desk on arrival.
+	 {{/if-cond}}
 
-	{{#if-cond @@addressee_only@@ '==' true}} Addressee only. {{/if-cond}}
+	{{#if-cond @@addressee_only@@ '==' true}} 
+	Addressee only. 
+	{{/if-cond}}
 
-	{{#if @@id_required@@ }} ID required. {{/if}}
+	{{#if @@id_required@@ }} 
+	ID required. 
+	{{/if}}
 
+	Details:
 	{{#each @@manifest@@}}
 	@@timestamp@@ - @@note@@
 	{{/each}}
@@ -379,11 +486,16 @@ Iterator used to traverse through an object or array. Returns access to child at
 
 #### Output
 
-	Hi Franco Trimboli, You have an item to collect within 4 days at Hawthorn. 
-	Charges to pay. 20-10-2014 10:24 – Delivered
-	20-10-2014 9:11 - Signed
-	See http://collect.auspo.st/s/hZad781i for more.
-
+	Hi Franco Trimboli, 
+	
+	You have an job to process within 4 days at Hawthorn. 
+	See the check-in desk on arrival.
+	
+	Details:
+	20-10-2014 10:15 - Req. Start Time
+	20-10-2014 16:00 - End Time
+	
+	See http://customer.au.whispir.com/s/aYid781 for more.
 
 
 
