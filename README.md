@@ -159,7 +159,7 @@ JSON array of Javascript resource URLs.
 	    "https://maps.googleapis.com/maps/api/js"
 	]
 
-* These are external javascript resources which are loaded in the <head> of a Rich Message. 
+* These are external javascript resources which are loaded in the **head** tag of a Rich Message. 
 
 ## Defining Properties
 
