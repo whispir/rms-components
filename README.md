@@ -9,7 +9,7 @@ This repository contains a library of customised components developed by the Whi
 
 ## About Components
 
-**Components** are extensible 'snippits' of content that form the basic building blocks of rich messages. Any number of components can be assembed to create rich messages and interactive mini-applications, which are then served by the Whispir platform.
+**Components** are extensible 'snippets' of content that form the basic building blocks of rich messages. Any number of components can be assembled to create rich messages and interactive mini-applications, which are then served by the Whispir platform.
 
 Components can be extended and built from the ground up to allow template builders and developers the facility to create any component they can imagine.
 
@@ -19,7 +19,7 @@ Components are defined using languages and tools developers use today, namely **
 
 Whispir provides a number of default Components out of the box. These components help facilitate basic authoring, and act as a starting point to build your own components.
 
-* Components can used by **dragging and dropping** them from the component library onto the composition area.
+* Components can be used by **dragging and dropping** them from the component library onto the composition area.
 * Any Component on the composition area can then be modified by hovering, and clicking the **Edit** action. 
 * Editing a Component will display the **Properties** of this component within the right sidebar. For example, an image component will have properties to select the image to be displayed, and perhaps properties to modify it's height and width. 
 
@@ -44,7 +44,7 @@ The following sample structure illustrates this relationship;
 
 ## Customising a Component
 
-Components provide devolopers a **build once, re-use many** approach to building templates and HTML5 apps.
+Components provide developers a **build once, re-use many** approach to building templates and HTML5 apps.
  
 ### By Example
 
@@ -180,7 +180,7 @@ Now, when someone uses your component, they can browse in an image, or edit the 
 
 ### Property types
 
-Proterties are defined using four primary types;
+Properties are defined using four primary types;
 
 
 | Type        | Displays in the sidebar                                        | Accepts                      |
@@ -194,7 +194,7 @@ Proterties are defined using four primary types;
 
 ### Property Samples
 
-The following is an sample of all Properties used within a "Customer Profile" Element;
+The following is a sample of all Properties used within a "Customer Profile" Element;
 
 	[
 	    {
@@ -292,7 +292,8 @@ Using the previous "Customer Profile" example above;
 			font-family: sans-serif;
 			}
 		img {
-			width: 100%;			}
+			width: 100%;
+			}
 	</style>
 
 
@@ -462,7 +463,7 @@ Iterator used to traverse through an object or array. Returns access to child at
 
 	Hi @@fullname@@, 
 	
-	You have an job to process within @@num_days@@ 
+	You have a job to process within @@num_days@@ 
 	days at @@workcentre_name@@. 
 
 	{{#if-cond @@new_customer@@ '==' true}} 
@@ -488,7 +489,7 @@ Iterator used to traverse through an object or array. Returns access to child at
 
 	Hi Franco Trimboli, 
 	
-	You have an job to process within 4 days at Hawthorn. 
+	You have a job to process within 4 days at Hawthorn. 
 	See the check-in desk on arrival.
 	
 	Details:
