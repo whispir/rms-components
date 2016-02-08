@@ -483,7 +483,7 @@ Iterator used to traverse through an object or array. Returns access to child at
 	@@timestamp@@ - @@note@@
 	{{/each}}
 
-	See @@web_url@@ for more.
+	See @@web_link@@ for more.
 
 #### Output
 
