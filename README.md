@@ -419,14 +419,14 @@ Conditional logic allows content to be dynamically shown or hidden based on the 
 #### if
 This basic conditional operator is used to test if an attribute has any value. If this attribute has a value, it returns content specified within this block.
 
-	{{#if @@attribute@@}} exists and has content {{/if-cond}}
+	{{#if @@attribute@@}} exists and has content {{/if}}
 #### if-cond
 
 Conditional operator used to perform a string comparison of an attribute's value. If true, returns content specified within block.
 
 	{{#if-cond @@attribute@@ '==' 'true'}} Yes, it's true {{/if-cond}}
 
-**if-cond** supports, '==' equal to, and '!=' not equal to.
+**if-cond** supports, '==' equal to, and '~' for contains searches.
 
 #### each
 
